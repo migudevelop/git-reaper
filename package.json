@@ -1,0 +1,42 @@
+{
+  "name": "git-reaper",
+  "version": "0.1.0",
+  "description": "A CLI tool to manage git branches and clean up stale branches.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "git-reaper": "./src/index.js"
+  },
+  "scripts": {
+    "start:dev": "node src/index.js",
+    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
+    "prettify": "prettier . --write",
+    "prettier:check": "prettier . --check",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "Miguel Martínez",
+  "license": "ISC",
+  "dependencies": {
+    "@clack/prompts": "0.11.0",
+    "colorette": "2.0.20",
+    "commander": "14.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@eslint/js": "9.29.0",
+    "eslint": "9.29.0",
+    "globals": "16.2.0",
+    "husky": "8.0.0",
+    "lint-staged": "16.1.2",
+    "prettier": "3.6.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
