@@ -1,0 +1,45 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [created]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepublish:
+    name: Prepublish checks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['22.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: ./.github/actions/setup-pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests and eslint
+        run: pnpm run prepublish
+
+  publish-npm:
+    name: Publish to npm
+    needs:
+      - prepublish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org/'
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

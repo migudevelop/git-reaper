@@ -1,0 +1,16 @@
+name: Setup Node
+description: Install dependencies for performing nodejs actions
+
+inputs:
+  node-version:  
+    description: Version of nodejs
+    required: false
+    default: "22.x"
+
+runs:
+  using: composite
+  steps:
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}

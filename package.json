@@ -7,6 +7,19 @@
   "bin": {
     "git-reaper": "./src/index.js"
   },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/migudevelop/git-reaper.git"
+  },
+  "homepage": "https://github.com/migudevelop/git-reaper#readme",
   "scripts": {
     "start:dev": "node src/index.js",
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
@@ -14,11 +27,33 @@
     "prettify": "prettier . --write",
     "prettier:check": "prettier . --check",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "npm test && npm run lint",
+    "push:tags": "git push && git push --tags"
   },
-  "keywords": [],
+  "keywords": [
+    "git",
+    "cli",
+    "branch",
+    "management",
+    "cleanup",
+    "git-branch",
+    "git-cleanup",
+    "git-reaper",
+    "git-tools",
+    "git-utilities",
+    "git-branch-cleanup",
+    "git-branch-manager",
+    "git-branch-manager-cli",
+    "developer-tools",
+    "command-line",
+    "git-tools",
+    "branch-cleanup",
+    "local-branches",
+    "branches"
+  ],
   "author": "Miguel Martínez",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@clack/prompts": "0.11.0",
     "colorette": "2.0.20",
