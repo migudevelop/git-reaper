@@ -8,7 +8,6 @@ import {
 import { outro } from '@clack/prompts'
 import { greenBright, redBright } from 'colorette'
 
-const program = new Command()
 const EXIT_APP_MESSAGE = 'Thanks for use this cli'
 const CANCEL_CODE = 0
 
@@ -16,13 +15,14 @@ const CANCEL_CODE = 0
  * Initializes the git-reaper CLI and defines the main options and actions.
  */
 export function initCli() {
+  const program = new Command()
   program
     .name('git-reaper')
     .description('List and delete old git branches')
     .version('0.1.0')
     .option('-d, --delete', 'Delete branches')
     .action(async (options) => {
-      if (options.delete) {
+      if (options?.delete) {
         const branches = await getBranches()
         const selectedBranches =
           await showDeletedBranchesMultiselectPrompt(branches)

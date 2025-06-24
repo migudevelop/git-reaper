@@ -4,12 +4,12 @@ import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
   {
-    files: ['**/*.{js,mjs,cjs}'],
-    plugins: { js },
+    files: ['src/**/*.{js,mjs,cjs}'],
+    plugins: { js, globals },
     extends: ['js/recommended']
   },
   {
-    files: ['**/*.{js,mjs,cjs}'],
+    files: ['src/**/*.{js,mjs,cjs}'],
     languageOptions: { globals: globals.node },
     rules: {
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
@@ -21,6 +21,12 @@ export default defineConfig([
           message: 'Use import instead of require'
         }
       ]
+    }
+  },
+  {
+    files: ['**/*.test.js'],
+    languageOptions: {
+      globals: globals.jest
     }
   }
 ])

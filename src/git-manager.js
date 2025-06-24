@@ -1,13 +1,8 @@
-import { exec } from 'node:child_process'
-import { promisify } from 'node:util'
 import { exitCli } from './cli.js'
-import { cleanLines, createBranchData } from './helpers.js'
+import { cleanLines, createBranchData, execAsync } from './helpers.js'
 import { cyan, green, yellow, bold } from 'colorette'
 
 const DELIMITER = '|||'
-
-const execAsync = promisify(exec)
-
 /**
  * Gets the list of local branches with relevant information.
  * @returns {Promise<object[]>} Array of objects with branch data.

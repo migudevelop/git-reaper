@@ -2,6 +2,8 @@ import { isCancel, multiselect } from '@clack/prompts'
 import { exitCli } from './cli.js'
 import { bold, cyan, green, yellow } from 'colorette'
 import { confirm } from '@clack/prompts'
+import { exec } from 'node:child_process'
+import { promisify } from 'node:util'
 
 export const CANCEL_MESSAGE = 'Execution is cancel'
 const CURRENT_BRANCH_SYMBOL = '*'
@@ -97,3 +99,10 @@ export async function showConfirmationPrompt() {
   checkPrompt(confirmed)
   return confirmed
 }
+
+/**
+ * Executes a shell command and returns a promise with stdout and stderr.
+ * @param {string} command - The shell command to execute.
+ * @returns {Promise<{ stdout: string, stderr: string }>} The result of the command.
+ */
+export const execAsync = promisify(exec)
