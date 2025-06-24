@@ -1,0 +1,23 @@
+name: Prepublish checks
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  prepublish:
+    name: Prepublish checks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['22.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: ./.github/actions/setup-pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests and eslint
+        run: pnpm run prepublish

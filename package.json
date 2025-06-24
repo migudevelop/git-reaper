@@ -27,7 +27,7 @@
     "prettify": "prettier . --write",
     "prettier:check": "prettier . --check",
     "prepare": "husky install",
-    "test": "jest",
+    "test": "jest --silent=false",
     "prepublish": "pnpm run test && pnpm run lint",
     "push:tags": "git push && git push --tags"
   },
