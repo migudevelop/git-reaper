@@ -108,7 +108,6 @@ describe('git-manager.js', () => {
       ]
       jest.spyOn(gitManager, 'getBranches').mockResolvedValue(branches)
       await gitManager.printBranches()
-      await new Promise((r) => setTimeout(r, 100)) // wait for console.log to be called
       expect(console.log).toHaveBeenCalled()
     })
     it('should call exitCli if no branches', async () => {
