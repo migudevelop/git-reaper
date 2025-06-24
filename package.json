@@ -22,13 +22,13 @@
   "homepage": "https://github.com/migudevelop/git-reaper#readme",
   "scripts": {
     "start:dev": "node src/index.js",
-    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
-    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix ./src/**/*.js",
+    "lint": "eslint ./src/**/*.js",
     "prettify": "prettier . --write",
     "prettier:check": "prettier . --check",
     "prepare": "husky install",
     "test": "jest",
-    "prepublish": "npm test && npm run lint",
+    "prepublish": "pnpm run test && pnpm run lint",
     "push:tags": "git push && git push --tags"
   },
   "keywords": [
@@ -74,7 +74,7 @@
     "prettier": "3.6.0"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
+    "src/**/*.js": [
       "prettier --write",
       "eslint --fix"
     ]
