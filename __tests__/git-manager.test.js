@@ -7,7 +7,18 @@ jest.mock('../src/cli.js', () => ({
 }))
 
 describe('git-manager.js', () => {
+  let originalLog, originalError
+
+  beforeEach(() => {
+    originalLog = console.log
+    originalError = console.error
+    console.log = jest.fn()
+    console.error = jest.fn()
+  })
+
   afterEach(() => {
+    console.log = originalLog
+    console.error = originalError
     jest.restoreAllMocks()
   })
 
@@ -65,13 +76,11 @@ describe('git-manager.js', () => {
   describe('deleteBranchs', () => {
     it('should delete branches and return true', async () => {
       jest.spyOn(helpers, 'execAsync').mockResolvedValue({})
-      jest.spyOn(console, 'error').mockImplementation(() => {})
       const result = await gitManager.deleteBranchs(['main', 'dev'])
       expect(result).toBe(true)
     })
     it('should return false if execAsync throws', async () => {
       jest.spyOn(helpers, 'execAsync').mockRejectedValue(new Error('fail'))
-      jest.spyOn(console, 'error').mockImplementation(() => {})
       const result = await gitManager.deleteBranchs('main')
       expect(result).toBe(false)
     })
@@ -98,16 +107,13 @@ describe('git-manager.js', () => {
         }
       ]
       jest.spyOn(gitManager, 'getBranches').mockResolvedValue(branches)
-      jest.spyOn(console, 'log').mockImplementation(() => {})
       await gitManager.printBranches()
-      await new Promise((resolve) => setTimeout(resolve, 100)) // wait for console.log to be called
       expect(console.log).toHaveBeenCalled()
     })
     it('should call exitCli if no branches', async () => {
       jest.spyOn(helpers, 'execAsync').mockResolvedValue({ stdout: '' })
       jest.spyOn(gitManager, 'getBranches').mockResolvedValue([])
       await gitManager.printBranches()
-      await new Promise((resolve) => setTimeout(resolve, 100)) // wait for console.log to be called
       expect(cli.exitCli).toHaveBeenCalledWith('No branches found.')
     })
   })
