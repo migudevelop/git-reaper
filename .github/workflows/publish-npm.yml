@@ -9,8 +9,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  prepublish:
-    uses: ./.github/workflows/prepublish.yml
   publish-npm:
     name: Publish to npm
     runs-on: ubuntu-latest

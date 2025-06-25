@@ -6,6 +6,10 @@ inputs:
     description: Version of nodejs
     required: false
     default: "22.x"
+  registry-url:
+    description: The npm registry URL (optional)
+    required: false
+    default: "https://registry.npmjs.org/"
 
 runs:
   using: composite
@@ -14,3 +18,4 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
+        registry-url: ${{ inputs.registry-url }}
