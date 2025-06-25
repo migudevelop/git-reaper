@@ -44,8 +44,8 @@ Git Reaper is a command-line interface (CLI) tool designed to help developers ma
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/migudevelop/git-reaper.git
+   cd git-reaper
    ```
 
 2. **Install dependencies:**
@@ -53,6 +53,13 @@ Git Reaper is a command-line interface (CLI) tool designed to help developers ma
    npm install
    # or
    pnpm install
+   ```
+
+2. **Or Install the CLI globally:**
+   ```bash
+   npm install -g git-reaper
+   # or
+   pnpm install -g git-reaper
    ```
 
 3. **(Optional) Link the CLI globally:**
