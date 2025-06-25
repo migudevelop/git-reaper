@@ -1,6 +1,6 @@
 {
   "name": "git-reaper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI tool to manage git branches and clean up stale branches.",
   "main": "src/index.js",
   "type": "module",
@@ -32,7 +32,14 @@
     "push:tags": "git push && git push --tags"
   },
   "keywords": [
+    "git-reaper",
     "git",
+    "reaper",
+    "branch-cleaner",
+    "branch-manager",
+    "git-branch-manager",
+    "git-branch-cleaner",
+    "git-branch-reaper",
     "cli",
     "branch",
     "management",
