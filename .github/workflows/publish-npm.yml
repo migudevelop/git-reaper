@@ -9,6 +9,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  prepublish:
+    uses: ./.github/workflows/prepublish.yml
   publish-npm:
     name: Publish to npm
     runs-on: ubuntu-latest
@@ -17,10 +19,13 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: ./.github/actions/setup-node
         with:
           node-version: '22.x'
           registry-url: 'https://registry.npmjs.org/'
+      - uses: ./.github/actions/setup-pnpm
+      - name: Install dependencies
+        run: pnpm install
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
